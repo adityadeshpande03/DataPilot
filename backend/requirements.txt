@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+
+google-genai
+
+pydantic
+pydantic-settings
+
+openpyxl
+
+numpy
+pandas
+matplotlib
