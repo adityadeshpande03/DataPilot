@@ -1,0 +1,41 @@
+{
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.typeCheckingMode": "standard",
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}/src"
+    ],
+    "python.envFile": "${workspaceFolder}/.env",
+    "python.autoComplete.extraPaths": [
+        "${workspaceFolder}/src"
+    ],
+    "python.analysis.diagnosticMode": "workspace",
+    "files.trimTrailingWhitespace": true,
+    "editor.trimAutoWhitespace": true,
+    "editor.renderWhitespace": "trailing",
+    "python.defaultInterpreterPath": "${workspaceFolder}\\venv\\Scripts\\python.exe",
+    "editor.formatOnSave": true,
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        }
+    },
+    "black-formatter.path": [
+        "black"
+    ],
+    "pylint.enabled": true,
+    "pylint.args": [
+        "--rcfile=.pylintrc"
+    ],
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/.mypy_cache": true,
+        "**/.pytest_cache": true,
+        "**/.venv": true,
+        "**/.vscode": false
+    },
+    "editor.codeLens": true,
+    "python.analysis.inlayHints.variableTypes": true,
+    "python.analysis.inlayHints.functionReturnTypes": true,
+    "postman.settings.dotenv-detection-notification-visibility": false,
+}
