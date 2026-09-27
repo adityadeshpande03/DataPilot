@@ -2,28 +2,52 @@ import { Box, Button, Card, CardContent, Typography } from "@mui/material";
 import { useState } from "react";
 import FormInput from "../common/FormInput";
 import dataPilotLogo from "../../assets/DataPilotLogo.png";
+import { authenticateUser } from "../../services/user-management/authService";
+import { useNavigate } from "react-router-dom";
+import { useSnackbar } from "notistack";
 
 function LoginCard() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
+    const { enqueueSnackbar } = useSnackbar();
 
-    function handleLogin(event) {
+    async function handleLogin(event) {
         event.preventDefault();
 
-        console.log("Email:", email);
-        console.log("Password:", password);
+        try {
+            const result = await authenticateUser(email, password);
+
+            enqueueSnackbar(result.message, { variant: 'success' });
+
+            console.log("Authentication successful:", result);
+
+            navigate('/home');
+
+        } catch (error) {
+            enqueueSnackbar(error.message, { variant: 'error' });
+            console.error("Authentication failed:", error.message);
+        }
     }
 
     return (
         <Card
+            elevation={5}
             sx={{
-                width: '400px',
-                maxwidth: 420,
+                width: '100%',
+                maxWidth: 380,
+
+                transition: 'transform 0.25s ease, box-shadow 0.25s ease',
+
+                '&:hover': {
+                    transform: 'translateY(-4px)',
+                    boxShadow: 4,
+                },
             }}
         >
             <CardContent
                 sx={{
-                    p:4,
+                    p: 4,
                 }}
             >
                 <Box
@@ -47,7 +71,7 @@ function LoginCard() {
                         textAlign: 'center',
                     }}
                 >
-                    Login to continue.
+                    Enter details to continue.
                 </Typography>
 
                 <Box
@@ -76,9 +100,10 @@ function LoginCard() {
                     <Button
                         type="submit"
                         variant="contained"
+                        color="primary"
                         fullWidth
                     >
-                        Login
+                        Login / Sign Up
                     </Button>
                 </Box>
             </CardContent>

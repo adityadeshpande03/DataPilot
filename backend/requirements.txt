@@ -1,16 +1,29 @@
+# This file lists all the dependencies for the backend application.
+
+# Server and framework dependencies
 fastapi
 uvicorn
 
+# GenAI SDK for interacting with Google GenAI services
 google-genai
 
+# Data validation and settings management
 pydantic
 pydantic-settings
+pydantic[email]
 
+# Excel/s file handling
 openpyxl
 
+# Data analysis and visualization libraries
 numpy
 pandas
 matplotlib
 
+# Database and ORM dependencies
 sqlalchemy
-psycopg2
+psycopg[binary]
+alembic
+
+# Security and authentication dependencies
+pwdlib[argon2]

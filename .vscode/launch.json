@@ -7,16 +7,16 @@
             "request": "launch",
             "module": "uvicorn",
             "args": [
-                "backend.app.main:app",
+                "app.main:app",
                 "--reload",
                 "--port",
                 "8000"
             ],
             "jinja": true,
             "justMyCode": true,
-            "cwd": "${workspaceFolder}",
+            "cwd": "${workspaceFolder}/backend",
             "env": {
-                "PYTHONPATH": "${workspaceFolder}"
+                "PYTHONPATH": "${workspaceFolder}/backend"
             },
             "console": "integratedTerminal"
         },
