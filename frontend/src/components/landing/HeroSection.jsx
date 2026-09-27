@@ -4,36 +4,64 @@ function HeroSection() {
     return (
         <Box
             sx={{
-                width: '100%',
-                maxWidth: 600,
+                maxWidth: 700,
             }}
         >
             <Typography
-                variant="h2"
-                component="h1"
+                variant="body2"
                 sx={{
-                    fontWeight: 700,
+                    color: "primary.main",
+                    fontWeight: 600,
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase",
                     mb: 2,
                 }}
             >
-                DataPilot
+                Intelligent Data Analysis
             </Typography>
 
             <Typography
-                variant="h5"
+                component="h1"
                 sx={{
-                    mb: 2,
+                    fontSize: {
+                        xs: "2.5rem",
+                        md: "3.5rem",
+                        lg: "4rem",
+                    },
+                    fontWeight: 700,
+                    lineHeight: 1.1,
+                    letterSpacing: "-0.04em",
+                    color: "text.primary",
+                    mb: 3,
                 }}
             >
-                AI-powered data analysis through natural language.
+                AI-powered data analysis{" "}
+                <Box
+                    component="span"
+                    sx={{
+                        background:
+                            "linear-gradient(90deg, #006FE6, #00B8C8)",
+                        backgroundClip: "text",
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                    }}
+                >
+                    through natural language.
+                </Box>
             </Typography>
 
             <Typography
                 variant="body1"
-                color="text.secondary"
+                sx={{
+                    maxWidth: 620,
+                    color: "text.secondary",
+                    fontSize: "1.1rem",
+                    lineHeight: 1.7,
+                }}
             >
-                Upload your dataset, ask questions in plain language,
-                and let DataPilot analyze your data and generate insights.
+                Upload your spreadsheets and datasets, ask questions in
+                natural language, and let DataPilot transform your data into
+                meaningful insights.
             </Typography>
         </Box>
     );

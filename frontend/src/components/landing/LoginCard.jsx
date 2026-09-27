@@ -16,14 +16,22 @@ function LoginCard() {
 
     return (
         <Card
+            elevation={5}
             sx={{
-                width: '400px',
-                maxwidth: 420,
+                width: '100%',
+                maxWidth: 380,
+
+                transition: 'transform 0.25s ease, box-shadow 0.25s ease',
+
+                '&:hover': {
+                    transform: 'translateY(-4px)',
+                    boxShadow: 4,
+                },
             }}
         >
             <CardContent
                 sx={{
-                    p:4,
+                    p: 4,
                 }}
             >
                 <Box
@@ -76,6 +84,7 @@ function LoginCard() {
                     <Button
                         type="submit"
                         variant="contained"
+                        color="primary"
                         fullWidth
                     >
                         Login
