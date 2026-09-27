@@ -7,19 +7,22 @@ import theme from './theme/theme.js';
 
 import './index.css'
 import App from './App.jsx'
+import NotificationProvider from "./components/common/NotificationProvider";
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ThemeProvider theme={theme}>
-      <GlobalStyles
-        styles={(theme) => ({
-          body: {
-            backgroundColor: theme.palette.background.default,
-            color: theme.palette.text.primary,
-          },
-        })}
-      />
-      <App />
+      <NotificationProvider>
+        <GlobalStyles
+          styles={(theme) => ({
+            body: {
+              backgroundColor: theme.palette.background.default,
+              color: theme.palette.text.primary,
+            },
+          })}
+        />
+        <App />
+      </NotificationProvider>
     </ThemeProvider>
   </StrictMode>,
 )

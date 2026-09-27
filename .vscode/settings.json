@@ -2,17 +2,17 @@
     "python.analysis.autoImportCompletions": true,
     "python.analysis.typeCheckingMode": "standard",
     "python.analysis.extraPaths": [
-        "${workspaceFolder}/src"
+        "${workspaceFolder}/backend"
     ],
     "python.envFile": "${workspaceFolder}/.env",
     "python.autoComplete.extraPaths": [
-        "${workspaceFolder}/src"
+        "${workspaceFolder}/backend"
     ],
     "python.analysis.diagnosticMode": "workspace",
     "files.trimTrailingWhitespace": true,
     "editor.trimAutoWhitespace": true,
     "editor.renderWhitespace": "trailing",
-    "python.defaultInterpreterPath": "${workspaceFolder}\\venv\\Scripts\\python.exe",
+    "python.defaultInterpreterPath": "${workspaceFolder}\\backend\\.venv\\Scripts\\python.exe",
     "editor.formatOnSave": true,
     "[python]": {
         "editor.defaultFormatter": "ms-python.black-formatter",
