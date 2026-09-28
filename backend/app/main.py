@@ -5,6 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.db import router as db_router
 from app.api.user import router as user_router
+from app.core.config import settings
 from app.core.logging import get_logger, setup_logging
 from app.db.connection import check_db_connection
 
@@ -27,7 +28,7 @@ app = FastAPI(title="DataPilot Backend API", version="1.0.0", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[origin.strip() for origin in settings.CORS_ORIGINS.split(",")],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
