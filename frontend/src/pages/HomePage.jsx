@@ -10,9 +10,12 @@ import { logout } from "../services/user-management/authService";
 function HomePage() {
     const navigate = useNavigate();
 
-    function handleLogout() {
-        logout();
-        navigate("/");
+    async function handleLogout() {
+        try {
+            await logout();
+        } finally {
+            navigate("/");
+        }
     }
 
     return (

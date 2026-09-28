@@ -19,8 +19,12 @@ export async function getCurrentUser() {
     return apiClient(ENDPOINTS.USER_MANAGEMENT.ME);
 }
 
-export function logout() {
-    clearToken();
+export async function logout() {
+    try {
+        await apiClient(ENDPOINTS.USER_MANAGEMENT.LOGOUT, { method: "POST" });
+    } finally {
+        clearToken();
+    }
 }
 
 // Admin-only; the admin is identified by the token, no body needed

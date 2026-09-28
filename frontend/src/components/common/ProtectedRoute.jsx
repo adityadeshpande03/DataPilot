@@ -6,7 +6,8 @@ import { getToken } from "../../services/user-management/tokenStorage";
 
 function ProtectedRoute({ children }) {
     // "checking" -> "valid" | "invalid"
-    const [status, setStatus] = useState(getToken() ? "checking" : "invalid");
+    // Always check: a missing access token can still be restored from the refresh cookie
+    const [status, setStatus] = useState("checking");
     const { enqueueSnackbar } = useSnackbar();
 
     useEffect(() => {
