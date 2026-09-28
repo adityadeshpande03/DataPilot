@@ -19,4 +19,5 @@ dependencies = [
     "sqlalchemy>=2.1.1",
     "uvicorn>=0.54.0",
     "pyjwt>=2.15.0",
+    "boto3>=1.43.103",
 ]
