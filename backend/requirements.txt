@@ -28,3 +28,6 @@ alembic
 # Security and authentication dependencies
 pwdlib[argon2]
 pyjwt
+
+# AWS SDK for Python (Boto3) for interacting with AWS services
+boto3
