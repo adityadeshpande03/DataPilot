@@ -2,13 +2,13 @@ import uuid
 
 from fastapi import APIRouter, HTTPException, status
 
-from app.core.dependencies import DbSession, UserServiceDep
+from app.core.dependencies import CurrentAdmin, CurrentUser, DbSession, UserServiceDep
 from app.core.exceptions import (
     CannotDeleteSelfError,
     InvalidCredentialsError,
-    PermissionDeniedError,
     UserNotFoundError,
 )
+from app.core.security import create_access_token
 from app.schemas.users import AuthRequest, AuthResponse, UserResponse
 
 router = APIRouter(prefix="/api/users", tags=["Users"])
@@ -22,23 +22,25 @@ def login_or_signup(payload: AuthRequest, db: DbSession, user_service: UserServi
 
     message = "Account created" if is_new_user else "Login successful"
     return AuthResponse(
+        access_token=create_access_token(user.id, user.role),
         user=UserResponse.model_validate(user),  # ORM object -> response schema
         is_new_user=is_new_user,
         message=message,
     )
 
 
-# Admin-only. The body holds the ADMIN's own email + password (temporary until JWT).
+@router.get("/me", response_model=UserResponse)
+def get_me(user: CurrentUser):
+    return user
+
+
+# Admin-only. The admin is identified from the Bearer token, no request body.
 @router.delete("/{user_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_user(
-    user_id: uuid.UUID, admin: AuthRequest, db: DbSession, user_service: UserServiceDep
+    user_id: uuid.UUID, admin: CurrentAdmin, db: DbSession, user_service: UserServiceDep
 ):
     try:
-        user_service.delete_user(db, admin.email, admin.password, user_id)
-    except InvalidCredentialsError:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid email or password")
-    except PermissionDeniedError:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Admin access required")
+        user_service.delete_user(db, admin, user_id)
     except CannotDeleteSelfError:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Admins cannot delete themselves")
     except UserNotFoundError:

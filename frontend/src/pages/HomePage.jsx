@@ -5,11 +5,13 @@ import {
     Typography,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { logout } from "../services/user-management/authService";
 
 function HomePage() {
     const navigate = useNavigate();
 
     function handleLogout() {
+        logout();
         navigate("/");
     }
 

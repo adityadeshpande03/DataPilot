@@ -6,7 +6,6 @@ from sqlalchemy.orm import Session
 from app.core.exceptions import (
     CannotDeleteSelfError,
     InvalidCredentialsError,
-    PermissionDeniedError,
     UserNotFoundError,
 )
 from app.core.logging import get_logger
@@ -47,19 +46,8 @@ class UserService:
         logger.info(f"User logged in: {email}")
         return user, False
 
-    def authenticate(self, db: Session, email: str, password: str) -> User:
-        # Like login, but never creates a user: unknown email or wrong password both fail
-        user = self.get_user_by_email(db, email.strip().lower())
-        if user is None or not verify_password(password, user.password_hash):
-            raise InvalidCredentialsError()
-        return user
-
-    def delete_user(
-        self, db: Session, admin_email: str, admin_password: str, user_id: uuid.UUID
-    ) -> None:
-        admin = self.authenticate(db, admin_email, admin_password)
-        if admin.role != "admin":
-            raise PermissionDeniedError()
+    def delete_user(self, db: Session, admin: User, user_id: uuid.UUID) -> None:
+        # admin is already authenticated + role-checked by the CurrentAdmin dependency
         if admin.id == user_id:
             raise CannotDeleteSelfError()
 

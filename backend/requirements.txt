@@ -27,3 +27,4 @@ alembic
 
 # Security and authentication dependencies
 pwdlib[argon2]
+pyjwt

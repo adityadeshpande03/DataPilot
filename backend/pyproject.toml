@@ -18,4 +18,5 @@ dependencies = [
     "pydantic-settings>=2.15.0",
     "sqlalchemy>=2.1.1",
     "uvicorn>=0.54.0",
+    "pyjwt>=2.15.0",
 ]

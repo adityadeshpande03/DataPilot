@@ -12,6 +12,11 @@ class UserNotFoundError(Exception):
     pass
 
 
+class InvalidTokenError(Exception):
+    # Raised when a JWT is expired, tampered with, or malformed
+    pass
+
+
 class CannotDeleteSelfError(Exception):
     # Stops an admin from deleting their own account (and locking everyone out)
     pass
